@@ -1,7 +1,9 @@
 execute pathogen#infect()
 syntax on
+filetype on
 filetype plugin on
-colorscheme inkpot
+filetype indent on
+" colorscheme inkpot
 
 " Variable Settings {{{
 set clipboard=unnamed
@@ -27,6 +29,13 @@ set shiftwidth=2  " auto indent is 2
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
 "}}}
+
+" Golang settings {{{
+set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
+autocmd BufWritePost,FileWritePost *.go silent! execute "!goimports -w %"
+autocmd BufWritePost,FileWritePost *.go silent! execute "!gofmt -w %"
+autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow 10 
+" }}}
 
 " Python settings {{{
 autocmd FileType python setlocal tabstop=4        " tab spacing is 4
