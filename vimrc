@@ -32,9 +32,9 @@ match OverLength /\%81v.\+/
 
 " Golang settings {{{
 set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
-autocmd BufWritePost,FileWritePost *.go silent! execute "!goimports -w %"
-autocmd BufWritePost,FileWritePost *.go silent! execute "!gofmt -w %"
-autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow 10 
+autocmd BufWritePost,FileWritePost *.go silent! execute '!goimports -w % 2>/dev/null'
+autocmd BufWritePost,FileWritePost *.go silent! execute '!gofmt -w % 2>/dev/null'
+autocmd BufWritePost,FileWritePost *.go silent! execute 'Lint' | cwindow 10 
 " }}}
 
 " Python settings {{{
