@@ -64,6 +64,10 @@ autocmd FileType yaml setlocal softtabstop=4  " back-tab spacing is 2
 autocmd FileType yaml setlocal shiftwidth=4   " auto indent is 2
 "}}}
 
+" terraform settings {{{
+let g:terraform_align=1
+"}}}
+
 " Key Mappings {{{
 cmap w!! w !sudo tee > /dev/null %
 nmap <S-Tab> <<
