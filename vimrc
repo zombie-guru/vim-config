@@ -3,7 +3,7 @@ syntax on
 filetype on
 filetype plugin on
 filetype indent on
-" colorscheme inkpot
+colorscheme jellybeans
 
 " Variable Settings {{{
 set clipboard=unnamed
@@ -26,17 +26,21 @@ set shiftwidth=2  " auto indent is 2
 "}}}
 
 " Max line length settings {{{
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+set textwidth=80
+set colorcolumn=+1
 "}}}
 
 " Golang settings {{{
 set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
-autocmd BufWritePost,FileWritePost *.go silent! execute '!goimports -w % 2>/dev/null'
-autocmd BufWritePost,FileWritePost *.go silent! execute '!gofmt -w % 2>/dev/null'
+autocmd BufWritePost,FileWritePost *.go silent! execute '!goimports -w % 2>/dev/null' | cwindow 10
+autocmd BufWritePost,FileWritePost *.go silent! execute '!gofmt -w % 2>/dev/null' | cwindow 10
 autocmd BufWritePost,FileWritePost *.go silent! execute 'Lint' | cwindow 10 
 " }}}
 
+" Terraform settinsg {{{
+autocmd BufWritePre *.tf :%s/\s\+$//e             " delete trailing space 
+"}}}
+"
 " Python settings {{{
 autocmd FileType python setlocal tabstop=4        " tab spacing is 4
 autocmd FileType python setlocal softtabstop=4    " back-tab spacing is 4
