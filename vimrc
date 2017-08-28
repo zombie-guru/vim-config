@@ -39,6 +39,7 @@ autocmd BufWritePost,FileWritePost *.go silent! execute 'Lint' | cwindow 10
 
 " Terraform settinsg {{{
 autocmd BufWritePre *.tf :%s/\s\+$//e             " delete trailing space 
+autocmd BufWritePost,FileWritePost *.tf silent! execute '!terraform fmt --write=true % >/dev/null 2>/dev/null' | cwindow 10
 "}}}
 "
 " Python settings {{{
