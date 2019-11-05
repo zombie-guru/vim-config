@@ -2,7 +2,6 @@ execute pathogen#infect()
 syntax on
 filetype on
 filetype plugin on
-filetype indent on
 colorscheme jellybeans
 
 " Variable Settings {{{
@@ -10,7 +9,6 @@ set clipboard=unnamed
 set autoread
 set nowrap        " don't wrap lines
 set autoindent    " always set autoindenting on
-set copyindent    " copy the previous indentation on autoindenting
 set number        " always show line numbers
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 set showmatch     " set show matching parenthesis
@@ -31,9 +29,9 @@ set colorcolumn=+1
 "}}}
 
 " Golang settings {{{
-set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
+set rtp+=/Volumes/src/go/src/golang.org/x/lint/misc/vim
 autocmd BufWritePost,FileWritePost *.go silent! execute '!goimports -w % 2>/dev/null' | cwindow 10
-autocmd BufWritePost,FileWritePost *.go silent! execute '!gofmt -w % 2>/dev/null' | cwindow 10
+autocmd BufWritePost,FileWritePost *.go silent! execute '!gofmt -s -w % 2>/dev/null' | cwindow 10
 autocmd BufWritePost,FileWritePost *.go silent! execute 'Lint' | cwindow 10 
 " }}}
 
@@ -49,6 +47,14 @@ autocmd FileType python setlocal shiftwidth=4     " auto indent is 4
 autocmd BufWritePre *.py :%s/\s\+$//e             " delete trailing space 
 "}}}
 
+"Ruby settings {{{
+autocmd BufWritePre *.rb :%s/\s\+$//e             " delete trailing space 
+"}}}
+
+"Shell settings {{{
+autocmd BufWritePre *.sh :%s/\s\+$//e             " delete trailing space 
+"}}}
+
 " RST settings {{{
 autocmd FileType rst setlocal tabstop=4           " tab spacing is 4
 autocmd FileType rst setlocal softtabstop=4       " back-tab spacing is 4
@@ -61,12 +67,19 @@ autocmd FileType rst setlocal syntax=rest         " use custom rest syntax
 autocmd FileType markdown setlocal tabstop=4      " tab spacing is 2
 autocmd FileType markdown setlocal softtabstop=4  " back-tab spacing is 2
 autocmd FileType markdown setlocal shiftwidth=4   " auto indent is 2
+autocmd BufNewFile,BufRead *.md set ft=markdown spell
 "}}}
 
-" markdown settings {{{
-autocmd FileType yaml setlocal tabstop=4      " tab spacing is 2
-autocmd FileType yaml setlocal softtabstop=4  " back-tab spacing is 2
-autocmd FileType yaml setlocal shiftwidth=4   " auto indent is 2
+" yaml settings {{{
+autocmd FileType yaml setlocal tabstop=2      " tab spacing is 2
+autocmd FileType yaml setlocal softtabstop=2  " back-tab spacing is 2
+autocmd FileType yaml setlocal shiftwidth=2   " auto indent is 2
+autocmd BufWritePre *.yaml :%s/\s\+$//e       " delete trailing space
+
+autocmd FileType yml setlocal tabstop=2      " tab spacing is 2
+autocmd FileType yml setlocal softtabstop=2  " back-tab spacing is 2
+autocmd FileType yml setlocal shiftwidth=2   " auto indent is 2
+autocmd BufWritePre *.yml :%s/\s\+$//e       " delete trailing space
 "}}}
 
 " terraform settings {{{
